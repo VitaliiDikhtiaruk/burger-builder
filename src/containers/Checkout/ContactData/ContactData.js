@@ -99,7 +99,7 @@ class ContactData extends Component {
 
     orderHandler = ( event ) => {
         event.preventDefault();
-  
+
         const formData = {};
         for (let formElementIdentifier in this.state.orderForm) {
             formData[formElementIdentifier] = this.state.orderForm[formElementIdentifier].value;
@@ -108,18 +108,18 @@ class ContactData extends Component {
             ingredients: this.props.ings,
             price: this.props.price,
             orderData: formData
-        }
+        };
 
         this.props.onOrderBurger(order);
-        
-    }
+
+    };
 
     checkValidity(value, rules) {
         let isValid = true;
         if (!rules) {
             return true;
         }
-        
+
         if (rules.required) {
             isValid = value.trim() !== '' && isValid;
         }
@@ -143,20 +143,20 @@ class ContactData extends Component {
         }
 
         return isValid;
-    }
+    };
 
     inputChangedHandler = (event, inputIdentifier) => {
         const updatedOrderForm = {
             ...this.state.orderForm
         };
-        const updatedFormElement = { 
+        const updatedFormElement = {
             ...updatedOrderForm[inputIdentifier]
         };
         updatedFormElement.value = event.target.value;
         updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation);
         updatedFormElement.touched = true;
         updatedOrderForm[inputIdentifier] = updatedFormElement;
-        
+
         let formIsValid = true;
         for (let inputIdentifier in updatedOrderForm) {
             formIsValid = updatedOrderForm[inputIdentifier].valid && formIsValid;
@@ -175,7 +175,7 @@ class ContactData extends Component {
         let form = (
             <form onSubmit={this.orderHandler}>
                 {formElementsArray.map(formElement => (
-                    <Input 
+                    <Input
                         key={formElement.id}
                         elementType={formElement.config.elementType}
                         elementConfig={formElement.config.elementConfig}
